@@ -18,6 +18,7 @@ class UserTableSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
+            'tipoEntidad' => '',
             'password' => Hash::make('123'),
             'cliente_id' => 1,
             'role' => 'admin',
@@ -28,6 +29,7 @@ class UserTableSeeder extends Seeder
         User::create([
             'name' => 'Val',
             'email' => 'val@example.com',
+            'tipoEntidad' => '',
             'password' => Hash::make('123'),
             'cliente_id' => 1,
             'role' => 'user',

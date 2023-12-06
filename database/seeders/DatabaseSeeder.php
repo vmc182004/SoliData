@@ -19,9 +19,12 @@ class DatabaseSeeder extends Seeder
         $this->call(IconosTableSeeder::class);
         $this->call(ContenidoTableSeeder::class);
         $this->call(BlogTableSeeder::class);
+        $this->call(TipoEntidadTableSeeder::class);
+        $this->call(SegmentacionTableSeeder::class);
         $this->call(ClientesSeeder::class);
-        $this->call(UserTableSeeder::class);
         $this->call(BoletinTableSeeder::class);
+        $this->call(UserTableSeeder::class);
+        
         
     }
 }

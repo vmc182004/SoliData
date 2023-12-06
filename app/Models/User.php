@@ -57,5 +57,5 @@ public function compras()
     {
         return $this->belongsTo(Cliente::class);
     }
-
+  
 }

@@ -37,27 +37,37 @@
             <form method="POST" action="{{ route('validar-registro') }}">
                 @csrf
                 <br><br>
-                <div class="fas fa mb-3">
+                <div class="mb-3">
                     <label for="userInput" class="form-label">Nombre completo</label>
                     <input type="text" class="form-control" id="userInput" name="name" required autocomplete="disable">
                 </div>
                 <br>
-                <div class="fas fa mb-3">
+                <div class="mb-3">
                     <label for="nitInput" class="form-label">NIT</label>
                     <input type="text" class="form-control" id="nitInput" name="nit" required autocomplete="disable">
                 </div>
-                <br>                
-                <div class="fas fa mb-3">
+                <br>   
+                <div class="mb-3">
+                <label for="tipoEntidad" class="form-label">Tipo de entidad</label>
+                <select class="form-control" id="tipoEntidad" name="tipoEntidad" required>
+                    <option value="Especializada"> Especializada</option>
+                    <option value="Fondosdeempleados">Fondos de empleados</option>
+                    <option value="Mutuales">Mutuales</option>
+                    <option value="Cooperativasyotras">Cooperativas y otras</option>
+                </select>
+                </div>
+                <br>             
+                <div class="mb-3">
                     <label for="emailInput" class="form-label">Email</label>
                     <input type="email" class="form-control" id="emailInput" name="email" required autocomplete="disable">
                 </div>
                 <br>
-                <div class="fas fa mb-3">
+                <div class="mb-3">
                     <label for="passwordInput" class="form-label">Password</label>
                     <input type="password" class="form-control" id="passwordInput" name="password" required>
                 </div>
                 <br><br>
-                <div class="fas fa">
+                <div class="">
                     <p>
                         ¿Ya tienes cuenta? <a style="color: RGB(0 130 130);" href="{{ route('login') }}">Inicia sesion</a>
                     </p>

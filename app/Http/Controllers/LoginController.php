@@ -45,6 +45,7 @@ class LoginController extends Controller
 {
     $user = new User();
     $user->name = $request->name;
+    $user->tipoEntidad = $request->tipoEntidad;
     $user->email = $request->email;
     $user->password = Hash::make($request->password);
 
@@ -127,6 +128,7 @@ public function handleGoogleCallback()
         // Si el usuario no existe, puedes crearlo en tu base de datos
         $newUser = new User();
         $newUser->name = $user->name;
+        $newUser->tipoEntidad = $user->tipoEntidad;
         $newUser->email = $user->email;
         $newUser->password = Hash::make(Str::random(12)); // Contraseña aleatoria
         $newUser->role = 'user'; // Asigna el rol 'user' al nuevo usuario
