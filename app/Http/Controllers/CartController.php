@@ -25,15 +25,15 @@ public function shop()
     $cliente = Auth::user()->cliente;
     $segmentacion = Auth::user()->cliente->segmentacion->nameSegmentacion;
     $tipoentidad = Auth::user()->cliente->segmentacion->tipoentidad;
-    
+
     // dd(c);
 
     $products = Product::all();
-    
+
     $priceProductos = [];
     $newProductos = [];
     foreach($products as $i => $product)
-    { 
+    {
         $priceProductos[] = [
             'id' => $product->id,
             'Micro2' => $product->micro2,
@@ -53,6 +53,7 @@ public function shop()
                     'price' => $priceProducto[$segmentacion],
                     'name' => $product->name,
                     'description' => $product->description,
+                    'contenido' => $product->contenido,
                     'image_path' => $product->image_path,
                 ];
             }
@@ -72,15 +73,15 @@ public function shop()
     if (Auth::check()) {
         $user = Auth::user();
 
-        foreach ($products as $product) {
+        foreach ($newProductos as $newProduct) {
             // Comprueba si existe una compra asociada al usuario y al producto
-            $hasPurchased[$product->id] = $user->compras->contains('product_id', $product->id);
+            $hasPurchased[$newProduct['id']] = $user->compras->contains('product_id', $newProduct['id']);
         }
-        
+
     } else {
         // Si el usuario no ha iniciado sesión, establece todos los productos como no comprados
-        foreach ($products as $product) {
-            $hasPurchased[$product->id] = false;
+        foreach ($newProductos as $newProduct) {
+            $hasPurchased[$newProduct['id']] = false;
         }
     }
     // Suponiendo que $nit es el NIT ingresado por el cliente al registrarse
@@ -90,12 +91,12 @@ public function shop()
     $rates = $marquesinaController->index()->getData()['rates'];
 
     return view('shop', [
-        'title' => 'E-COMMERCE STORE | SHOP', 
-        'products' => $products, 
-        'hasPurchased' => $hasPurchased, 
+        'title' => 'E-COMMERCE STORE | SHOP',
+        'products' => $products,
+        'hasPurchased' => $hasPurchased,
         'Marquesina' => $Marquesina,
         'constantAssets' => $constantAssets,
-        'user' => $user, 
+        'user' => $user,
         'rates' => $rates,
         'newProductos' => $newProductos
     ]);
@@ -125,12 +126,12 @@ public function shop()
                 'image' => $request->img
             ]
         ]);
-        
+
         // No registres la compra aquí, ya que debe hacerse después de que el usuario complete el pago.
-        
+
         return redirect()->route('cart.index')->with('success_msg', 'Servicio Agregado a su Carrito!');
     }
-    
+
 
     public function update(Request $request)
     {
@@ -138,19 +139,19 @@ public function shop()
             'id' => 'required',
             'quantity' => 'required|integer', // La cantidad debe ser un número entero
         ]);
-    
+
         $newQuantity = max(1, $request->quantity); // Asegura que la cantidad sea al menos 1
-    
+
         CarPackage::update($request->id, [
             'quantity' => [
                 'relative' => false,
                 'value' => $newQuantity
             ]
         ]);
-    
+
         return redirect()->route('cart.index')->with('success_msg', 'El carrito se ha actualizado correctamente.');
     }
-    
+
 
 
     public function clear()
@@ -162,27 +163,27 @@ public function shop()
     public function procesoPedido(Request $request)
     {
         \MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
-    
+
         $products = []; // Arreglo para almacenar los productos
-    
+
         foreach (CarPackage::getContent() as $item):
             $product = new \MercadoPago\Item(); // Crea un nuevo objeto para cada producto
             $product->title = $item->name;
             $product->quantity = $item->quantity;
             $product->unit_price = $item->price;
             $products[] = $product; // Agrega el producto al arreglo
-    
+
             // No necesitas crear una nueva preferencia en cada iteración
         endforeach;
-    
+
         $preference = new \MercadoPago\Preference();
         $preference->items = $products; // Asigna el arreglo de productos a la preferencia
-    
+
         $preference->back_urls = [
             'success' => route('pedido.success'),
             'failure' => route('cart.index'),
         ];
-    
+
         $preference->save();
         return redirect()->away($preference->init_point);
     }
@@ -203,7 +204,7 @@ public function success()
         $detalle->precio = $item->price;
         $detalle->pedido_id = $pedido->id;
         $detalle->save();
-        
+
         // Si el producto especial (ID 999) se encuentra en el carrito, desbloquear todos los informes
         if ($item->id == 999) {
             $user = Auth::user();
@@ -241,16 +242,16 @@ public function success()
             $user = auth()->user();
             // Aquí implementa la lógica para verificar si el usuario ha comprado el producto con el ID $productId.
             // Puedes utilizar Eloquent u otras consultas de Laravel.
-    
+
             // Por ejemplo, asumiendo que los productos comprados se almacenan en la tabla "compras" con el ID del producto.
             $hasPurchased = $user->Compra()->where('product_id', $productId)->exists();
-    
+
             return $hasPurchased;
         }
-        
+
         return false; // Si el usuario no ha iniciado sesión, asumimos que no ha comprado el producto.
     }
-    
+
     // En el controlador después de completar la compra
 public function purchaseProduct($productId) {
     // Lógica para procesar la compra y guardar los detalles
@@ -303,7 +304,7 @@ public function categorizarCliente(Request $request)
 
                 $nameSegmentacion = 'AlgunNombre';
                 $precio = 100;
-                
+
                 dump($nameSegmentacion);
                 dump($precio);
 

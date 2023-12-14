@@ -14,7 +14,7 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'id' => 999,
+            'id' => 1,
             'name' => 'Acceso a todos los informes',
             'micro2' => 1000000,
             'micro1' => 2000000,
@@ -29,7 +29,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'id' => 1,
+            'id' => 2,
             'name' => 'Informe de prueba 1',
             'micro2' => 1000000,
             'micro1' => 2000000,
@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
             'image_path' => ''
         ]);
         Product::create([
-            'id' => 2,
+            'id' => 3,
             'name' => 'Informe de prueba 2',
             'micro2' => 1000000,
             'micro1' => 2000000,
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
             'image_path' => ''
         ]);
         Product::create([
-            'id' => 3,
+            'id' => 4,
             'name' => 'Informe de prueba 3',
             'micro2' => 1000000,
             'micro1' => 2000000,
@@ -71,7 +71,7 @@ class ProductsTableSeeder extends Seeder
             'image_path' => ''
         ]);
         Product::create([
-            'id' => 4,
+            'id' => 5,
             'name' => 'Informe de prueba 4',
             'micro2' => 1000000,
             'micro1' => 2000000,
@@ -85,7 +85,7 @@ class ProductsTableSeeder extends Seeder
             'image_path' => ''
         ]);
 
-        
+
 
     }
 }
