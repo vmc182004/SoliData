@@ -16,16 +16,24 @@ class TipoEntidadTableSeeder extends Seeder
     {
         //
         TipoEntidad::create([
-            'nameEntidad' => 'Especializadas'
+            'id' => '1',
+            'nameEntidad' => 'Ahorro y crédito'
         ]);
         TipoEntidad::create([
-            'nameEntidad' => 'Fondosdeempleados'
+            'id' => '2',
+            'nameEntidad' => 'Cooperativa sin ahorro'
         ]);
         TipoEntidad::create([
+            'id' => '3',
+            'nameEntidad' => 'Fondos'
+        ]);
+        TipoEntidad::create([
+            'id' => '4',
             'nameEntidad' => 'Mutuales'
         ]);
         TipoEntidad::create([
-            'nameEntidad' => 'Cooperativasyotras'
+            'id' => '5',
+            'nameEntidad' => 'Cooperativas y Otras'
         ]);
     }
 }

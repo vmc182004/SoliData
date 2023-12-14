@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Segmentacion;
+use League\Csv\Reader;
 use Illuminate\Database\Seeder;
 
 class SegmentacionTableSeeder extends Seeder
@@ -14,34 +15,31 @@ class SegmentacionTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'micro2',
-            'tipo_entidad_id' => 1,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'micro1',
-            'tipo_entidad_id' => 2,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'pequeñas',
-            'tipo_entidad_id' => 3,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'medianas',
-            'tipo_entidad_id' => 4,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'grande',
-            'tipo_entidad_id' => 1,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'megas',
-            'tipo_entidad_id' => 2,
-        ]);
-        Segmentacion:: create ([
-            'nameSegmentacion' => 'top',
-            'tipo_entidad_id' => 3,
-        ]);
+        $csv = Reader::createFromPath(public_path('excel/segmentacioness.csv'), 'r');
+        $csv->setHeaderOffset(0); // Si el archivo tiene encabezados
+
+        $seeders = $csv->getRecords();
+
+        foreach ($seeders as $record) {
+            // Aquí deberías adaptar esto a tu estructura de datos y modelo
+            $mayor = $record['mayor'];
+            $menor = $record['menor'];
+            if($mayor === ''){
+                $mayor = NULL;
+            }
+            if($menor === ''){
+                $menor = NULL;
+            }
+            Segmentacion::create([
+                'nameSegmentacion' => $record['nameSegmentacion'],
+                'mayor' => $mayor,
+                'menor' => $menor,
+                'tipo_entidad_id' => $record['tipo_entidad_id'],
+                // ... y así sucesivamente con los campos del CSV
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Seeders importados correctamente');
     }
+    
 }

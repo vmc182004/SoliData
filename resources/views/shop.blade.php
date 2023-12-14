@@ -188,18 +188,19 @@
                                         </div>
                                     @endif
                                 @endif
-                                @foreach ($products as $producto)
-                                    @if ($producto->id != 999)
+                                @foreach ($newProductos as $newProduct)
+                                    @if ($newProduct['id'] != 999)
                                         <div class="col-lg-4">
                                             <div class="card mb-3" style="border-radius: 30px;">
-                                                <img src="{{ asset($producto->image_path) }}"
-                                                    alt="{{ $producto->name }}"
+                                                <img src="{{ asset($newProduct['image_path']) }}"
+                                                    alt="{{ $newProduct['name'] }}"
                                                     style=" height: 250px; width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; ">
 
                                                 <div class="card-body">
                                                     <h5 class="card-title"
                                                         style="color: #008282; text-align: center;font-family: 'Open Sans', sans-serif; font-size:22px;font-weight: bold;">
-                                                        {{ $producto->name }}</h5>
+                                                        {{ $newProduct['name'] }}
+                                                    </h5>
                                                     <div class="card-text-container">
                                                         <p class="card-text"
                                                             style="font-size:17px; font-family: 'Open Sans', sans-serif;font-weight: bold;">

@@ -16,10 +16,72 @@ class ProductsTableSeeder extends Seeder
         Product::create([
             'id' => 999,
             'name' => 'Acceso a todos los informes',
-            'minPrice' => 100000,
-            'maxPrice' => 200000,
+            'micro2' => 1000000,
+            'micro1' => 2000000,
+            'pequeñas' => 3000000,
+            'medianas' => 4000000,
+            'grandes' => 5000000,
+            'megas' => 6000000,
+            'top' => 7000000,
             'description' => 'Compra TODOS los informes',
             'contenido'=> 'Tienes acceso a todos los informes',
+            'image_path' => ''
+        ]);
+
+        Product::create([
+            'id' => 1,
+            'name' => 'Informe de prueba 1',
+            'micro2' => 1000000,
+            'micro1' => 2000000,
+            'pequeñas' => 3000000,
+            'medianas' => 4000000,
+            'grandes' => 5000000,
+            'megas' => 6000000,
+            'top' => 7000000,
+            'description' => 'Informe de prueba 1',
+            'contenido'=> 'Informe de prueba 1',
+            'image_path' => ''
+        ]);
+        Product::create([
+            'id' => 2,
+            'name' => 'Informe de prueba 2',
+            'micro2' => 1000000,
+            'micro1' => 2000000,
+            'pequeñas' => 3000000,
+            'medianas' => 4000000,
+            'grandes' => 5000000,
+            'megas' => 6000000,
+            'top' => 7000000,
+            'description' => 'Informe de prueba 2',
+            'contenido'=> 'Informe de prueba 2',
+            'image_path' => ''
+        ]);
+        Product::create([
+            'id' => 3,
+            'name' => 'Informe de prueba 3',
+            'micro2' => 1000000,
+            'micro1' => 2000000,
+            'pequeñas' => 3000000,
+            'medianas' => 4000000,
+            'grandes' => 5000000,
+            'megas' => 6000000,
+            'top' => 7000000,
+            'description' => 'Informe de prueba 3',
+            'contenido'=> 'Informe de prueba 3',
+            'image_path' => ''
+        ]);
+        Product::create([
+            'id' => 4,
+            'name' => 'Informe de prueba 4',
+            'micro2' => 1000000,
+            'micro1' => 2000000,
+            'pequeñas' => 3000000,
+            'medianas' => 4000000,
+            'grandes' => 5000000,
+            'megas' => 6000000,
+            'top' => 7000000,
+            'description' => 'Informe de prueba 4',
+            'contenido'=> 'Informe de prueba 4',
             'image_path' => ''
         ]);
 

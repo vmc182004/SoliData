@@ -13,39 +13,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
-    //
-    // public function register(Request $request)
-    // {
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->password = Hash::make($request->password);
-
-    //     $clientes = Cliente::get();
-
-    //     foreach ($clientes as $cliente) {
-    //         if($cliente->nitEmpresa === $request->nit){
-    //             $user->cliente_id = $cliente->id; // Agregar el campo NIT
-    //         }
-    //     }
-     
-    //     try {
-    //         $user->save();
-    //     } catch (\Exception $e) {
-    //         // Si se produce un error, agrega un mensaje de error a la sesión
-    //         return redirect(route('registro'))->with('error', 'Error al registrarse, verifique los datos y el correo electrónico único.');
-    //     }
-     
-    //     Auth::login($user);
-     
-    //     // Agregar un mensaje de éxito si el registro se realizó correctamente
-    //     return redirect(route('login'))->with('success', '¡Registro exitoso! Ya puedes iniciar sesión');
-    // }
+   
     public function register(Request $request)
 {
     $user = new User();
     $user->name = $request->name;
-    $user->tipoEntidad = $request->tipoEntidad;
     $user->email = $request->email;
     $user->password = Hash::make($request->password);
 
@@ -128,7 +100,6 @@ public function handleGoogleCallback()
         // Si el usuario no existe, puedes crearlo en tu base de datos
         $newUser = new User();
         $newUser->name = $user->name;
-        $newUser->tipoEntidad = $user->tipoEntidad;
         $newUser->email = $user->email;
         $newUser->password = Hash::make(Str::random(12)); // Contraseña aleatoria
         $newUser->role = 'user'; // Asigna el rol 'user' al nuevo usuario

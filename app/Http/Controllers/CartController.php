@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Compra;
 use App\Models\Pedido;
+use App\Models\Cliente;
 use App\Models\Detalle;
 use App\Models\Product;
 use Cart as CarPackage;
 use App\Models\Marquesina;
+use App\Models\Segmentacion;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmacionCompra;
 use Illuminate\Support\Facades\Auth;
@@ -17,31 +19,47 @@ use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
-    //EXIGE INICIAR SESION PARA VER LO QUE PUEDE COMPRAR
-//     public function shop()
-// {
-//     if (Auth::check()) {
-//         $user = Auth::user(); // Obtén el usuario autenticado
-//         $products = Product::all();
-
-//         // Crea un array para rastrear si el usuario ha comprado cada producto
-//         $hasPurchased = [];
-
-//         foreach ($products as $product) {
-//             // Comprueba si existe una compra asociada al usuario y al producto
-//             $hasPurchased[$product->id] = $user->compras->contains('product_id', $product->id);
-//         }
-
-//         return view('shop', ['title' => 'E-COMMERCE STORE | SHOP', 'products' => $products, 'hasPurchased' => $hasPurchased]);
-//     } else {
-//         // El usuario no está autenticado, puedes manejar esta situación de acuerdo a tus necesidades
-//         // Por ejemplo, redirigir al usuario a la página de inicio de sesión.
-//         return redirect()->route('login');
-//     }
-// }
 public function shop()
 {
+
+    $cliente = Auth::user()->cliente;
+    $segmentacion = Auth::user()->cliente->segmentacion->nameSegmentacion;
+    $tipoentidad = Auth::user()->cliente->segmentacion->tipoentidad;
+    
+    // dd(c);
+
     $products = Product::all();
+    
+    $priceProductos = [];
+    $newProductos = [];
+    foreach($products as $i => $product)
+    { 
+        $priceProductos[] = [
+            'id' => $product->id,
+            'Micro2' => $product->micro2,
+            'Micro1' => $product->micro1,
+            'Pequeñas' => $product->pequeñas,
+            'Medianas' => $product->medianas,
+            'Grandes' => $product->grandes,
+            'Megas' => $product->megas,
+            'Top' => $product->top,
+        ];
+
+        foreach( $priceProductos as $j => $priceProducto){
+            if(isset($priceProducto[$segmentacion])){
+                // dd($priceProducto[$segmentacion]);
+                $newProductos[$i] = [
+                    'id' => $product->id,
+                    'price' => $priceProducto[$segmentacion],
+                    'name' => $product->name,
+                    'description' => $product->description,
+                    'image_path' => $product->image_path,
+                ];
+            }
+        }
+    }
+    // dd($newProductos);
+
     $Marquesina = Marquesina::all();
     $constantAssets = 2000000;
     $user = Auth::user();
@@ -65,11 +83,22 @@ public function shop()
             $hasPurchased[$product->id] = false;
         }
     }
+    // Suponiendo que $nit es el NIT ingresado por el cliente al registrarse
+
 
     $marquesinaController = new MarquesinaController();
     $rates = $marquesinaController->index()->getData()['rates'];
 
-    return view('shop', ['title' => 'E-COMMERCE STORE | SHOP', 'products' => $products, 'hasPurchased' => $hasPurchased, 'Marquesina' => $Marquesina,'constantAssets' => $constantAssets,'user' => $user, 'rates' => $rates,]);
+    return view('shop', [
+        'title' => 'E-COMMERCE STORE | SHOP', 
+        'products' => $products, 
+        'hasPurchased' => $hasPurchased, 
+        'Marquesina' => $Marquesina,
+        'constantAssets' => $constantAssets,
+        'user' => $user, 
+        'rates' => $rates,
+        'newProductos' => $newProductos
+    ]);
 }
 
 
@@ -130,30 +159,6 @@ public function shop()
         return redirect()->route('cart.index')->with('success_msg', 'Car is cleared!');
     }
 
-    // public function procesoPedido(Request $request){
-        
-    //     \MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
-
-    //     $products=[];
-
-    //     foreach (CarPackage::getContent() as $r):
-
-    //         $preference=new \MercadoPago\Preference();
-    //         $item=new \MercadoPago\Item();
-    //         $item->title = $r->name;
-    //         $item->quantity = 1;
-    //         $item->unit_price = CarPackage::getSubTotal();
-    //         $products[]=$item;
-    //         $preference->items=$products;
-
-    //         $preference->back_urls=[
-    //             'success' =>route('pedido.success'),
-    //             'failure' =>route('cart.index'),
-    //         ];
-    //         $preference->save();
-    //         return redirect()->away($preference->init_point);
-    //     endforeach;
-    // }
     public function procesoPedido(Request $request)
     {
         \MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
@@ -181,39 +186,7 @@ public function shop()
         $preference->save();
         return redirect()->away($preference->init_point);
     }
-    
 
-//     public function success()
-// {
-//     $user_id = Auth::user()->id;
-//     $pedido = new Pedido();
-//     $pedido->codigo = uniqid();
-//     $pedido->total = CarPackage::getSubtotal();
-//     $pedido->user_id = $user_id;
-//     $pedido->save();
-
-//     foreach (CarPackage::getContent() as $item):
-//         $detalle = new Detalle();
-//         $detalle->cantidad = $item->quantity;
-//         $detalle->producto = $item->name;
-//         $detalle->precio = $item->price;
-//         $detalle->pedido_id = $pedido->id;
-//         $detalle->save();
-        
-//         // Después de completar el pago, registra la compra en Compra
-//         Compra::create([
-//             'user_id' => $user_id,
-//             'product_id' => $item->id,
-//             'purchased' => true,
-//         ]);
-//     endforeach;
-//     $userEmail = Auth::user()->email;
-//     Mail::to($userEmail)->send(new ConfirmacionCompra($pedido));
-
-//     CarPackage::clear();
-
-//     return view('front.confirmacion')->with(['pedido' => $pedido->codigo, 'total' => $pedido->total]);
-// }
 public function success()
 {
     $user_id = Auth::user()->id;
@@ -277,32 +250,6 @@ public function success()
         
         return false; // Si el usuario no ha iniciado sesión, asumimos que no ha comprado el producto.
     }
-    // public function checkIfUserHasPurchasedProduct($productId) {
-    //     // Verifica si el usuario ha iniciado sesión
-    //     if (auth()->check()) {
-    //         $user = auth()->user();
-    
-    //         // Obtiene el producto por su ID
-    //         $product = Product::find($productId);
-    
-    //         // Verifica si el usuario ha comprado el producto o si el precio es igual a 0
-    //         $hasPurchased = $user->Compra()->where('product_id', $productId)->exists() || $product->price == 0 ;
-    
-    //         return $hasPurchased;
-    //     }else if(auth()->check()) {
-    //         $user = auth()->user();
-    
-    //         // Obtiene el producto por su ID
-    //         $product = Product::find($productId);
-
-    //         $hasPurchased = $product->price == 0 ;
-
-    //         return $hasPurchased;
-
-    //     }
-    
-    //     return false; // Si el usuario no ha iniciado sesión, asumimos que no ha comprado el producto.
-    // }
     
     // En el controlador después de completar la compra
 public function purchaseProduct($productId) {
@@ -331,6 +278,49 @@ public function mostrarInforme($id)
 
     return view('verinforme', compact('product'));
 }
+
+public function categorizarCliente(Request $request)
+    {
+        $nit = $request->input('nit');
+
+        $cliente = Cliente::where('nitEmpresa', $nit)->first();
+
+        if ($cliente) {
+            $tipoEntidadId = $cliente->segmentacion_id;
+            $activos = $cliente->activos;
+
+            $segmentacion = Segmentacion::where('tipo_entidad_id', $tipoEntidadId)
+                ->where('mayor', '>=', $activos)
+                ->where(function ($query) use ($activos) {
+                    $query->where('menor', '<=', $activos)
+                        ->orWhere('menor', null);
+                })
+                ->first();
+
+            if ($segmentacion) {
+                $nameSegmentacion = $segmentacion->nameSegmentacion;
+                $precio = Product::where('nameSegmentacion', $nameSegmentacion)->first()->precio;
+
+                $nameSegmentacion = 'AlgunNombre';
+                $precio = 100;
+                
+                dump($nameSegmentacion);
+                dump($precio);
+
+                return view('shop')->with([
+                    'title' => 'E-COMMERCE STORE | SHOP',
+                    'nameSegmentacion' => $nameSegmentacion,
+                    'precio' => $precio,
+                    // ... (otras variables que necesites pasar)
+                ]);
+            } else {
+                return view('shop')->with('error', 'No se encontró una segmentación para estos activos y tipo de entidad.');
+            }
+        } else {
+            return view('shop')->with('error', 'No se encontró un cliente con el NIT proporcionado.');
+        }
+    }
+
 
 
 }

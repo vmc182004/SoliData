@@ -62,6 +62,7 @@ class HomeController extends Controller
         'rates' => $rates,
         'constantAssets' => $constantAssets,
         'user' => $user,
+        
     ]);
     }
 

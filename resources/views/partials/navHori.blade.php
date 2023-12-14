@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
     <title>CABECERA HORIZONTAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -14,16 +13,16 @@
         }
           #header {
             /* background-color: RGB(0 130 130); */
-            background-color:RGB(0 130 130) ;
+            background-color:#012060 ;
             position: absolute;
             top: 0;
-            left: 230px;
+            left: 15%;
             right: 0;
             z-index: 1;
             height: 70px;
-            width: 80%;
-            margin-left: 2%;
-            margin-top: 2%;
+            width: 78%;
+            margin-left: 4.5%;
+            margin-top: 1.5%;
             border-radius: 30px;
         }
 
@@ -52,11 +51,14 @@
 /* persona */
 /* Estilos para el botón de usuario */
 .user-info a {
+    text-decoration: none;
+    color: #333; /* Color del texto */
     font-weight: bold;
+    display: flex;
+    align-items: center;
     padding: 10px;
     cursor: pointer;
 }
-
 
 .user-info a i {
     margin-left: 5px;
@@ -108,7 +110,8 @@
 }
 .badge-dark {
     color: #fff;
-    background-color:RGB(0 130 130);
+    background-color:#2175aa;
+    font-size: 22px;
 }
         </style>
 </head>
@@ -134,11 +137,14 @@
        
        <ul class="navbar-nav ml-auto">
        <li class="nav-item">
-            <a class="" class="nav-link" href="{{ route('admin') }}"style="color:white; font-family: 'Open Sans', sans-serif; font-weight: bold; " >ADMINISTRADOR</a>
+            <a class="fas fa" class="nav-link" href="{{ route('admin') }}"style="color:white; " >ADMINISTRADOR</a>
         </li>
         </ul>
     </div>
-    @else 
+    @endif
+           
+            
+
         <!-- Enlaces de navegación (mantenidos a la derecha) -->
         <ul class="navbar-nav ml-auto">
             {{-- ... (tu código existente) ... --}}
@@ -160,12 +166,6 @@
             </li>
         </ul>
     </div>
-    
-    @endif
-           
-            
-
-        
 
     <!-- SI INICIA SESIÓN -->
     @if(Auth::check())
@@ -173,8 +173,7 @@
         <div class="user-info" id="user-toggle">
             <a>
                 <i class="fas fa-user" style="color:white;"></i>
-               <span style="color:white;font-family: 'Open Sans', sans-serif; font-weight: bold;"> {{ Auth::user()->name }}</span>
-
+               <i style="color:white;"> {{ Auth::user()->name }}</i>
 
                 <!-- <i class="fas fa-chevron-down"></i> -->
                 <a class="fas fa-sign-out-alt" style="color:white;" href="{{ route('logout') }}"></a>
@@ -206,7 +205,7 @@
     </script>
     @else
         <!-- Mostrar el botón de inicio de sesión -->
-        <a class=" btn btn-secondary ml-2" style="background-color:RGB(220 162 17); border:RGB(220 162 17); width: 200px; border-radius:20px;height:45px; display:flex; justify-content:center; align-items:center; font-family: 'Open Sans', sans-serif; font-weight: bold;font-size: 25px;"  href="{{ route('login') }}">INGRESAR</a>
+        <a class="fas fa btn btn-secondary ml-2" style="background-color:#2175aa; border:RGB(220 162 17); width: 200px; border-radius:20px;height:45px; display:flex; justify-content:center; align-items:center; font-family: ui-serif; font-size: 25px;"  href="{{ route('login') }}">Ingresar</a>
     @endif
        
 </nav>

@@ -16,6 +16,8 @@ class CreateSegmentacionsTable extends Migration
         Schema::create('segmentacions', function (Blueprint $table) {
             $table->id();
             $table->string('nameSegmentacion');
+            $table->decimal('mayor', 15,2)->nullable();
+            $table->decimal('menor', 15,2)->nullable();
             $table->unsignedBigInteger('tipo_entidad_id');
             $table->foreign('tipo_entidad_id')->references('id')->on('tipo_entidads');
             $table->timestamps();

@@ -23,8 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SegmentacionTableSeeder::class);
         $this->call(ClientesSeeder::class);
         $this->call(BoletinTableSeeder::class);
-        $this->call(UserTableSeeder::class);
-        
-        
+        $this->call(UserTableSeeder::class);   
     }
 }

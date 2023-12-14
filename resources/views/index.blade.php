@@ -94,6 +94,7 @@
 </head>
 
 <body>
+
     <!-- CABECERA -->
 
     @include('partials.navbar')
@@ -459,7 +460,6 @@
             </div>
         </div>
     </div>
-
     <!-- boletin -->
     <br>
     @include('footer.boletin')

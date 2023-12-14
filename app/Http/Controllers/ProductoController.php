@@ -27,8 +27,13 @@ class ProductoController extends Controller
         $product->description = $request->input('description');
         $product->contenido = $request->input('contenido');
         $product->contenido = html_entity_decode($request->input('contenido'));
-        $product->minPrice = $request->input('minPrice');
-        $product->maxPrice = $request->input('maxPrice');
+        $product->micro2 = $request->input('micro2');
+        $product->micro1 = $request->input('micro1');
+        $product->pequeñas = $request->input('pequeñas');
+        $product->medianas = $request->input('medianas');
+        $product->grandes = $request->input('grandes');
+        $product->megas = $request->input('megas');
+        $product->top = $request->input('top');
     
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -63,8 +68,13 @@ public function actualizarProducto(Request $request, $id)
     $producto = Product::find($id);
     $producto->name = $request->input('name');
     $producto->description = $request->input('description');
-    $producto->minPrice = $request->input('minPrice');
-    $producto->maxPrice = $request->input('maxPrice');
+    $producto->micro2 = $request->input('micro2');
+    $producto->micro1 = $request->input('micro1');
+    $producto->pequeñas = $request->input('pequeñas');
+    $producto->medianas = $request->input('medianas');
+    $producto->grandes = $request->input('grandes');
+    $producto->megas = $request->input('megas');
+    $producto->top = $request->input('top');
     $producto->contenido = html_entity_decode($request->input('contenido'));
     
 

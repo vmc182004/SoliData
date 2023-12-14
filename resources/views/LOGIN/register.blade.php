@@ -46,17 +46,7 @@
                     <label for="nitInput" class="form-label">NIT</label>
                     <input type="text" class="form-control" id="nitInput" name="nit" required autocomplete="disable">
                 </div>
-                <br>   
-                <div class="mb-3">
-                <label for="tipoEntidad" class="form-label">Tipo de entidad</label>
-                <select class="form-control" id="tipoEntidad" name="tipoEntidad" required>
-                    <option value="Especializada"> Especializada</option>
-                    <option value="Fondosdeempleados">Fondos de empleados</option>
-                    <option value="Mutuales">Mutuales</option>
-                    <option value="Cooperativasyotras">Cooperativas y otras</option>
-                </select>
-                </div>
-                <br>             
+                <br>         
                 <div class="mb-3">
                     <label for="emailInput" class="form-label">Email</label>
                     <input type="email" class="form-control" id="emailInput" name="email" required autocomplete="disable">
