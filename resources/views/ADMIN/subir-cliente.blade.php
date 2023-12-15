@@ -17,21 +17,25 @@
         <form method="POST" action="{{ route('admin.guardar-cliente') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="nameEmpresa">Nombre empresa:</label>
+                <input type="text" name="nameEmpresa" class="form-control" required>
+            </div>
+            <div class="form-group">
                 <label for="nitEmpresa">NIT:</label><br>
                 <input type="text" name="nitEmpresa" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="nombreEmpresa">Sigla empresa:</label>
-                <input type="text" name="sigla" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="nombreEmpresa">Tipo empresa:</label>
-                <input type="text" name="tipo" class="form-control" required>
+                <label for="emailEmpresa">Email empresa:</label>
+                <input type="text" name="emailEmpresa" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="activos">Activos:</label><br>
                 <h6>CANTIDAD SIN PUNTOS NI COMAS</h6>
                 <input type="decimal" name="activos" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="segmentacion_id">id fk:</label>
+                <input type="text" name="segmentacion_id" class="form-control" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Subir</button>

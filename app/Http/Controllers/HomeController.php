@@ -14,12 +14,44 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MarquesinaController;
 
+use App\Models\TipoEntidad;
+use League\Csv\Reader;
 
 class HomeController extends Controller
 {
     //
     public function index()
     {
+
+        //llamar a tipo de entidad 
+
+        $tipoEntidades = TipoEntidad::get();
+        $csv = Reader::createFromPath(public_path('excel/tecnoparques.csv'), 'r');
+        $csv->setHeaderOffset(0); // Si el archivo tiene encabezados
+        $seeders = $csv->getRecords();
+
+        $datos = [];
+
+        foreach($seeders as $seeder){
+            $datos[] = [
+                'nameEmpresa' => $seeder['nameEmpresa'],
+                'nameEntidad' => $seeder['tipoEntidad'],
+            ];
+        }
+        
+        $var = [];
+
+        foreach($tipoEntidades as $tipoEntidad){
+            $var[] = [
+                'nameEntidad' => $tipoEntidad->nameEntidad,
+            ];
+        }
+
+        dd($var, $datos);
+
+
+
+
         $iconos = Icono::all();
         $contenido = Contenido::all();
         $productos= Product::all();

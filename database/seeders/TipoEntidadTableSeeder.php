@@ -17,7 +17,7 @@ class TipoEntidadTableSeeder extends Seeder
         //
         TipoEntidad::create([
             'id' => '1',
-            'nameEntidad' => 'Ahorro y crédito'
+            'nameEntidad' => 'Ahorro y credito'
         ]);
         TipoEntidad::create([
             'id' => '2',
@@ -25,7 +25,7 @@ class TipoEntidadTableSeeder extends Seeder
         ]);
         TipoEntidad::create([
             'id' => '3',
-            'nameEntidad' => 'Fondos'
+            'nameEntidad' => 'Fondos de empleados'
         ]);
         TipoEntidad::create([
             'id' => '4',
@@ -33,7 +33,7 @@ class TipoEntidadTableSeeder extends Seeder
         ]);
         TipoEntidad::create([
             'id' => '5',
-            'nameEntidad' => 'Cooperativas y Otras'
+            'nameEntidad' => 'Cooperativa y otros'
         ]);
     }
 }

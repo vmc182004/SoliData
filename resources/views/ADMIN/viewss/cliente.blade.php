@@ -54,20 +54,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nit</th>
-                    <th>Sigla</th>
-                    <th>Tipo</th>
+                    <th>Empresa</th>
+                    <th>nitEmpresa</th>
+                    <th>emailEmpresa</th>
                     <th>Activos</th>
+                    <th>segmentacion_id</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($clientes as $cliente)
                 <tr>
-                    <td>{{ $cliente->nitEmpresa }}</td>
-                    <td>{{$cliente->sigla}}</td>
-                    <td>{{$cliente->tipo}}</td>
+                    <td>{{ $cliente->nameEmpresa }}</td>
+                    <td>{{$cliente->nitEmpresa}}</td>
+                    <td>{{$cliente->emailEmpresa}}</td>
                     <td>{{number_format($cliente->activos, 0, ',', '.') }}</td>
+                    <td>{{$cliente->segmentacion_id}}</td>
 
 
                     <td>
