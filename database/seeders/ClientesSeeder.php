@@ -12,7 +12,7 @@ class ClientesSeeder extends Seeder
     public function run()
     {
         $csv = Reader::createFromPath(public_path('excel/tecnoparques.csv'), 'r');
-        $csv->setHeaderOffset(0); // Si el archivo tiene encabezados
+        $csv->setHeaderOffset(0); // Si el archivo tiene encabezados 
 
         $seeders = $csv->getRecords();
 
