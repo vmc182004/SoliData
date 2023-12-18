@@ -9,6 +9,7 @@ use App\Models\Boletine;
 use App\Models\Carrusel;
 use App\Models\Contenido;
 use App\Models\Marquesina;
+use App\Models\Segmentacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,23 +32,33 @@ class HomeController extends Controller
         $seeders = $csv->getRecords();
 
         $datos = [];
-
+ 
         foreach($seeders as $seeder){
             $datos[] = [
                 'nameEmpresa' => $seeder['nameEmpresa'],
                 'nameEntidad' => $seeder['tipoEntidad'],
+                'activosEmpresa' => $seeder['activos'],
             ];
         }
         
         $var = [];
 
-        foreach($tipoEntidades as $tipoEntidad){
-            $var[] = [
-                'nameEntidad' => $tipoEntidad->nameEntidad,
-            ];
+        
+
+        $var2 = [];
+        foreach($datos as $dato){
+            foreach($tipoEntidades as $entidad){
+                if($dato['nameEntidad'] === $entidad->nameEntidad){
+                    $search = Segmentacion::find($entidad->id);
+                    if($dato['activosEmpresa'] > $search->mayor and $dato['activosEmpresa'] < $search->menor){
+                        $var2[] = $dato['nameEmpresa'].' '.$dato['activosEmpresa'].' '.$search->id.' '. $search->nameSegmentacion.' '. $search->tipo_entidad_id;
+                    }
+                }
+            }
+            
         }
 
-        dd($var, $datos);
+        dd($var2, $datos);
 
 
 

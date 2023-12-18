@@ -20,7 +20,7 @@ class Segmentacion extends Model
     ];
 
    
-    public function tipoentidad():BelongsTo
+    public function tipoEntidad():BelongsTo
     {
         return $this->belongsTo(TipoEntidad::class, 'tipo_entidad_id');
     }
