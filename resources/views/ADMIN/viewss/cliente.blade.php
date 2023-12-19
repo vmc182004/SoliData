@@ -27,7 +27,7 @@
         <h1 class="fas fa">Lista de empresas</h1>
         <br>
         <br>
-        
+
 <div class="fas fa" style="margin-left: 800px;">
     <a href="{{ route('admin.subir-cliente') }}" class="btn btn-primary">Subir empresa</a>
 </div>
@@ -51,41 +51,48 @@
     <button type="submit">Buscar</button>
 </form>
 <br>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Empresa</th>
-                    <th>nitEmpresa</th>
-                    <th>emailEmpresa</th>
-                    <th>Activos</th>
-                    <th>segmentacion_id</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($clientes as $cliente)
-                <tr>
-                    <td>{{ $cliente->nameEmpresa }}</td>
-                    <td>{{$cliente->nitEmpresa}}</td>
-                    <td>{{$cliente->emailEmpresa}}</td>
-                    <td>{{number_format($cliente->activos, 0, ',', '.') }}</td>
-                    <td>{{$cliente->segmentacion_id}}</td>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre Empresa</th>
+            {{-- <th>NIT</th> --}}
+            {{-- <th>Correo</th> --}}
+            <th>Activos</th>
+            <th>Id segmentacion</th>
+            <th>nombre segmentacion</th>
+            <th>Id entidad</th>
+            <th>nombre entidad</th>
+            {{-- <th>Acciones</th> --}}
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($clientes as $cliente)
+        <tr>
+            <td>{{ $cliente->nameEmpresa }}</td>
+            {{-- <td>{{$cliente->nitEmpresa}}</td> --}}
+            <td>{{number_format($cliente->activos, 0, ',', '.') }}</td>
+            <td>{{$cliente->segmentacion_id}}</td>
+            <td>{{$cliente->segmentacion->nameSegmentacion}}</td>
+            <td>{{$cliente->segmentacion->tipo_entidad_id}}</td>
+            <td>{{$cliente->segmentacion->tipoentidad->nameEntidad}}</td>
+            {{-- <td>{{$cliente->emailEmpresa}}</td> --}}
 
 
-                    <td>
-                        <a href="{{ route('admin.editar-cliente', ['id' => $cliente->id]) }}" class="btn btn-primary">Editar</a>
-                    </td>
-                    <td>
-                        <form method="POST" action="{{ route('admin.eliminar-cliente', ['id' => $cliente->id])}}" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar ?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+            {{-- <td>
+                <a href="{{ route('admin.editar-cliente', ['id' => $cliente->id]) }}" class="btn btn-primary">Editar</a>
+            </td> --}}
+            {{-- <td>
+                <form method="POST" action="{{ route('admin.eliminar-cliente', ['id' => $cliente->id])}}" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar ?')">Eliminar</button>
+                </form>
+            </td> --}}
+        </tr>
+        @endforeach
+    </tbody>
+</table>
         <!-- Tu código HTML anterior -->
 <!-- ... -->
 

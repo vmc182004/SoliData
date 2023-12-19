@@ -23,46 +23,6 @@ class HomeController extends Controller
     //
     public function index()
     {
-
-        //llamar a tipo de entidad 
-
-        $tipoEntidades = TipoEntidad::get();
-        $csv = Reader::createFromPath(public_path('excel/tecnoparques.csv'), 'r');
-        $csv->setHeaderOffset(0); // Si el archivo tiene encabezados
-        $seeders = $csv->getRecords();
-
-        $datos = [];
- 
-        foreach($seeders as $seeder){
-            $datos[] = [
-                'nameEmpresa' => $seeder['nameEmpresa'],
-                'nameEntidad' => $seeder['tipoEntidad'],
-                'activosEmpresa' => $seeder['activos'],
-            ];
-        }
-        
-        $var = [];
-
-        
-
-        $var2 = [];
-        foreach($datos as $dato){
-            foreach($tipoEntidades as $entidad){
-                if($dato['nameEntidad'] === $entidad->nameEntidad){
-                    $search = Segmentacion::find($entidad->id);
-                    if($dato['activosEmpresa'] > $search->mayor and $dato['activosEmpresa'] < $search->menor){
-                        $var2[] = $dato['nameEmpresa'].' '.$dato['activosEmpresa'].' '.$search->id.' '. $search->nameSegmentacion.' '. $search->tipo_entidad_id;
-                    }
-                }
-            }
-            
-        }
-
-        dd($var2, $datos);
-
-
-
-
         $iconos = Icono::all();
         $contenido = Contenido::all();
         $productos= Product::all();
@@ -94,18 +54,18 @@ class HomeController extends Controller
     $marquesinaController = new MarquesinaController();
     $rates = $marquesinaController->index()->getData()['rates'];
 
-        return view('index', ['iconos' => $iconos, 
-        'contenido' => $contenido, 
-        'productos' => $productos, 
-        'carrusel' => $carrusel, 
-        'boletine' => $boletine, 
+        return view('index', ['iconos' => $iconos,
+        'contenido' => $contenido,
+        'productos' => $productos,
+        'carrusel' => $carrusel,
+        'boletine' => $boletine,
         'compra' => $compra,
-        'hasPurchased' => $hasPurchased, 
+        'hasPurchased' => $hasPurchased,
         'Marquesina' => $Marquesina,
         'rates' => $rates,
         'constantAssets' => $constantAssets,
         'user' => $user,
-        
+
     ]);
     }
 

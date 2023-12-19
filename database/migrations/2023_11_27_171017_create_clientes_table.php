@@ -18,7 +18,7 @@ class CreateClientesTable extends Migration
             $table->string('nameEmpresa');
             $table->string('nitEmpresa');
             $table->string('emailEmpresa');
-            $table->decimal('activos', 15,2);
+            $table->decimal('activos', 30,2);
             $table->unsignedBigInteger('segmentacion_id');
             $table->timestamps();
         });
