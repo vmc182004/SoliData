@@ -254,7 +254,7 @@
                                                         <h5 class="modal-title"
                                                             id="productModalLabel{{ $newProduct['id'] }}">
                                                             @if ($hasPurchased[$newProduct['id']])
-                                                                {{ $pro->contenido }}
+                                                                {{-- {{ $pro->contenido }} --}}
                                                                 <div class="product-content">
                                                                     {!! $newProduct['contenido'] !!}
                                                                 </div>

@@ -21,6 +21,11 @@ class CartController extends Controller
 {
 public function shop()
 {
+    if (Auth::check()) {
+        // return redirect()->route('login'); // Redirige a la página de inicio de sesión
+    
+
+    $cliente = Cliente::all();
 
     $cliente = Auth::user()->cliente;
     $segmentacion = Auth::user()->cliente->segmentacion->nameSegmentacion;
@@ -101,7 +106,72 @@ public function shop()
         'newProductos' => $newProductos
     ]);
 }
+else {
 
+    $Marquesina = Marquesina::all();
+    $constantAssets = 2000000;
+
+    $marquesinaController = new MarquesinaController();
+    $rates = $marquesinaController->index()->getData()['rates'];
+
+    // Lógica para obtener los productos (elimina la lógica de $newProductos, $hasPurchased, etc.)
+    $products = Product::all();
+
+    $priceProductos = [];
+    $newProductos = [];
+    foreach($products as $i => $product)
+    {
+        $priceProductos[] = [
+            'id' => $product->id,
+            'Micro2' => $product->micro2,
+            'Micro1' => $product->micro1,
+            'Pequeñas' => $product->pequeñas,
+            'Medianas' => $product->medianas,
+            'Grandes' => $product->grandes,
+            'Megas' => $product->megas,
+            'Top' => $product->top,
+        ];
+
+            if(!Auth::check()){
+                // dd($priceProducto[$segmentacion]);
+                $newProductos[$i] = [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' =>$product->price,
+                    'description' => $product->description,
+                    'contenido' => $product->contenido,
+                    'image_path' => $product->image_path,
+                ];
+            }
+    }
+    $hasPurchased = [];
+
+    // Verifica si el usuario ha iniciado sesión
+    if (Auth::check()) {
+        $user = Auth::user();
+
+        foreach ($newProductos as $newProduct) {
+            // Comprueba si existe una compra asociada al usuario y al producto
+            $hasPurchased[$newProduct['id']] = $user->compras->contains('product_id', $newProduct['id']);
+        }
+
+    } else {
+        // Si el usuario no ha iniciado sesión, establece todos los productos como no comprados
+        foreach ($newProductos as $newProduct) {
+            $hasPurchased[$newProduct['id']] = false;
+        }
+    }
+    return view('shop', [
+        'title' => 'E-COMMERCE STORE | SHOP',
+        'products' => $products,
+        'Marquesina' => $Marquesina,
+        'constantAssets' => $constantAssets,
+        'hasPurchased' => $hasPurchased,
+        'rates' => $rates,
+        'newProductos' => $newProductos
+    ]);
+}
+}
 
     public function cart()
     {
