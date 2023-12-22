@@ -10,7 +10,8 @@
             background-color: #012060;
             text-align: center;
             width: 86.6%;
-            margin-left: 13.5%;
+            margin-left: 5.5%;
+
         }
         .footer-content {
             display: flex;
@@ -103,7 +104,7 @@
         <div>
 
 
-            <img src="{{ asset('img/solidata1.jpg') }}" style="height: 150px; width:350px;" alt="Logo" class="logo">
+            <img src="{{ asset('img/solidata1.jpg') }}" style="height: 150px; width:400px;" alt="Logo" class="logo">
             <br>
             <br>
             <br>

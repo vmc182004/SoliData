@@ -275,8 +275,8 @@ public function success()
         $detalle->pedido_id = $pedido->id;
         $detalle->save();
 
-        // Si el producto especial (ID 999) se encuentra en el carrito, desbloquear todos los informes
-        if ($item->id == 999) {
+        // Si el producto especial (ID 1) se encuentra en el carrito, desbloquear todos los informes
+        if ($item->id == 1) {
             $user = Auth::user();
             $informes = Product::all(); // Obtén todos los informes
             foreach ($informes as $informe) {

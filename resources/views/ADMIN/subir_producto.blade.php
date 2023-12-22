@@ -30,14 +30,39 @@
                 <textarea type="text" name="contenido" class="form-control" required></textarea>
             </div>
             <div class="form-group">
-                <label for="minPrice">Precio bajo COP:</label><br>
+                <label for="micro2">Precio micro2 COP:</label><br>
                 <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
-                <input type="number" name="minPrice" class="form-control" required>
+                <input type="number" name="micro2" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="maxPrice">Precio alto COP:</label><br>
+                <label for="micro1">Precio micro1 COP:</label><br>
                 <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
-                <input type="number" name="maxPrice" class="form-control" required>
+                <input type="number" name="micro1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pequeñas">Precio pequeñas COP:</label><br>
+                <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
+                <input type="number" name="pequeñas" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="medianas">Precio medianas COP:</label><br>
+                <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
+                <input type="number" name="medianas" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="grandes">Precio grandes COP:</label><br>
+                <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
+                <input type="number" name="grandes" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="megas">Precio megas COP:</label><br>
+                <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
+                <input type="number" name="megas" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="top">Precio top COP:</label><br>
+                <h6 class="fas fa">SIN PUNTOS NI COMAS </h6>
+                <input type="number" name="top" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="image">Imagen:</label>

@@ -30,12 +30,32 @@
                 <textarea name="description" class="form-control" required>{{ $producto->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="minPrice">Precio bajo:</label>
-                <input type="number" name="minPrice" class="form-control" value="{{ $producto->minPrice }}" required>
+                <label for="micro2">Precio micro2:</label>
+                <input type="number" name="micro2" class="form-control" value="{{ $producto->micro2 }}" required>
             </div>
             <div class="form-group">
-                <label for="maxPrice">Precio alto:</label>
-                <input type="number" name="maxPrice" class="form-control" value="{{ $producto->maxPrice }}" required>
+                <label for="micro1">Precio micro1:</label>
+                <input type="number" name="micro1" class="form-control" value="{{ $producto->micro1 }}" required>
+            </div>
+            <div class="form-group">
+                <label for="pequeñas">Precio pequeñas:</label>
+                <input type="number" name="pequeñas" class="form-control" value="{{ $producto->pequeñas }}" required>
+            </div>
+            <div class="form-group">
+                <label for="medianas">Precio medianas:</label>
+                <input type="number" name="medianas" class="form-control" value="{{ $producto->medianas }}" required>
+            </div>
+            <div class="form-group">
+                <label for="grandes">Precio grandes:</label>
+                <input type="number" name="grandes" class="form-control" value="{{ $producto->grandes }}" required>
+            </div>
+            <div class="form-group">
+                <label for="megas">Precio megas:</label>
+                <input type="number" name="megas" class="form-control" value="{{ $producto->megas }}" required>
+            </div>
+            <div class="form-group">
+                <label for="top">Precio top:</label>
+                <input type="number" name="top" class="form-control" value="{{ $producto->top }}" required>
             </div>
             <div class="form-group">
                 <label for="contenido">Contenido oculto:</label>

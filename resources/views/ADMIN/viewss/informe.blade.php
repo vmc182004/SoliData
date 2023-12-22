@@ -49,8 +49,13 @@
                 <tr>
                     <th>Nombre del Producto</th>
                     <th>Descripción</th>
-                    <th>Precio bajo</th>
-                    <th>Precio alto</th>
+                    <th>Precio micro 2</th>
+                    <th>Precio micro 1</th>
+                    <th>Precio pequeñas</th>
+                    <th>Precio medianas</th>
+                    <th>Precio grandes</th>
+                    <th>Precio megas</th>
+                    <th>Precio top </th>
                     <th>Contenido Oculto</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
@@ -61,8 +66,13 @@
                 <tr>
                     <td>{{ $producto->name }}</td>
                     <td>{{ $producto->description }}</td>
-                    <td>{{ $producto->minPrice }}</td>
-                    <td>{{ $producto->maxPrice }}</td>
+                    <td>{{ $producto->micro2 }}</td>
+                    <td>{{ $producto->micro1 }}</td>
+                    <td>{{$producto->pequeñas}}</td>
+                    <td>{{$producto->medianas}}</td>
+                    <td>{{$producto->grandes}}</td>
+                    <td>{{$producto->megas}}</td>
+                    <td>{{$producto->top}}</td>
                     <td>{{$producto->contenido}}</td>
                     <td><img src="{{ asset($producto->image_path) }}" style="width: 50px; height: 50px;"></td>
                     <td>

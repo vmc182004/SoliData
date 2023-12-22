@@ -72,7 +72,7 @@
         margin-bottom: 4%;
     }
     #imgconte{
-        margin-left: 30%;
+        margin-left: 10%;
         margin-top: 3%
     }
 
@@ -242,6 +242,7 @@
                             </div>
                         </div>
                     @endif
+                    
                     @if ($newProduct['id'] != 1)
                         <div class="col-lg-4">
                             <div class="card mb-3" style="border-radius: 30px;">
@@ -323,6 +324,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Modal para detalles del producto -->
                         <div class="modal fade" id="productModal{{ $newProduct['id'] }}"
                             tabindex="-1" role="dialog"
