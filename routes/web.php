@@ -21,6 +21,9 @@ use App\Http\Controllers\MarquesinaController;
 use App\Http\Controllers\EstadisticaController;
 use App\Http\Controllers\RiesgoController;
 use App\Http\Controllers\CifraController;
+use App\Http\Controllers\SegmentacionController;
+use App\Http\Controllers\TipoEntidadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -227,3 +230,8 @@ Route::get('/admin/riesgoss', [RiesgoController::class, 'mostrarRiesgos'])->name
 Route::get('/admin/editar-riesgos/{id}', [RiesgoController::class, 'editarRiesgos'])->name('admin.editar-riesgos');
 Route::put('/admin/actualizar-riesgos/{id}', [RiesgoController::class, 'actualizarRiesgos'])->name('admin.actualizar-riesgos');
 Route::delete('/admin/eliminar-riesgos/{id}', [RiesgoController::class, 'eliminarRiesgos'])->name('admin.eliminar-riesgos');
+
+
+Route::get('/admin/segmentacion', [SegmentacionController::class, 'mostrarSegmentacion'])->name('admin.segmentacion');
+Route::get('/admin/tipoEntidad', [TipoEntidadController::class, 'mostrarTipoEntidad'])->name('admin.tipoEntidad');
+

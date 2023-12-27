@@ -28,9 +28,9 @@
         <br>
         <br>
 
-<div class="fas fa" style="margin-left: 800px;">
+{{-- <div class="fas fa" style="margin-left: 800px;">
     <a href="{{ route('admin.subir-cliente') }}" class="btn btn-primary">Subir empresa</a>
-</div>
+</div> --}}
 <br>
 @if(session('success'))
 <div class="alert alert-success">
@@ -47,7 +47,7 @@
 <br>
 <br>
 <form action="{{ route('cliente.mostrar') }}" method="GET">
-    <input type="text" name="search" placeholder="Buscar por NIT o Sigla" value="{{ $search ?? '' }}">
+    <input type="text" name="search" placeholder="Buscar por NIT o nombre" value="{{ $search ?? '' }}">
     <button type="submit">Buscar</button>
 </form>
 <br>

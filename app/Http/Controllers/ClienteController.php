@@ -40,7 +40,7 @@ class ClienteController extends Controller
         if ($search) {
             $clientes->where(function ($query) use ($search) {
                 $query->where('nitEmpresa', 'like', '%' . $search . '%')
-                      ->orWhere('sigla', 'like', '%' . $search . '%');
+                      ->orWhere('nameEmpresa', 'like', '%' . $search . '%');
             });
         }
     
