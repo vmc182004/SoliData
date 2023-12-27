@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\AdminController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +18,9 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\MarquesinaController;
-
+use App\Http\Controllers\EstadisticaController;
+use App\Http\Controllers\RiesgoController;
+use App\Http\Controllers\CifraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +45,6 @@ Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
-
 
 // inicio sesion
 // routes login
@@ -81,9 +81,6 @@ Route::get('/tel', function () {
 })->name('tel');
 
 //view
-Route::view('/cifras',"cifrasG")->name('cifras');
-Route::view('/estadisticas',"estadisticas")->name('estadisticas');
-Route::view('/riesgos',"riesgos")->name('riesgos');
 Route::view('/informes',"informes")->name('informes');
 Route::view('/ver_productos','ADMIN.ver_productos')->name('ver_productos');
 
@@ -139,8 +136,6 @@ Route::delete('/admin/eliminar-contenido/{id}', [ContenidoController::class, 'el
 // 
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
-
 // 
 Route::get('/admin/subir-noticia', [NoticiaController::class,'formularioCargaNoticia'])->name('admin.subir-noticia');
 Route::post('/admin/guardar-noticia', [NoticiaController::class,'guardarNoticia'])->name('admin.guardar-noticia');
@@ -151,8 +146,6 @@ Route::delete('/admin/eliminar-noticia/{id}', [NoticiaController::class, 'elimin
 // 
 Route::get('/blog', [BlogController::class,'formularioCargaBlog'])->name('blog');
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
-
-
 
 // Route::view('/users',"ADMIN/viewss.users")->name('users');
 Route::get('/users', [UserController::class,'verUsuarios'])->name('users');
@@ -184,7 +177,6 @@ Route::delete('/admin/eliminar-boletine/{id}', [BoletineController::class, 'elim
 Route::get('/contact', [ContactoController::class, 'mostrarContacto'])->name('contact');
 Route::get('/subs', [BoletinController::class, 'mostrarSubs'])->name('subs');
 
-
 Route::get('/auth/google', [ LoginController::class, 'redirectToGoogle'])->name('google.redirect');
 // Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('google.redirect');
 
@@ -193,7 +185,6 @@ Route::get('/auth/google/callback', [ LoginController::class, 'handleGoogleCallb
 
 Route::get('/noticias/{id}', [NoticiaController:: class, 'mostrarBlog'])->name('noticias.mostrar');
 Route::get('/informes/{id}', [CartController:: class, 'mostrarInforme'])->name('informe.mostrar');
-
 
 Route::get('/admin/subir-marquesina', [MarquesinaController::class,'formularioCargaMarquesina'])->name('admin.subir-marquesina');
 Route::post('/admin/guardar-marquesina', [MarquesinaController::class,'guardarMarquesina'])->name('admin.guardar-marquesina');
@@ -211,3 +202,28 @@ Route::delete('/admin/eliminar-cliente/{id}', [ClienteController::class, 'elimin
 
 Route::get('/currency', [MarquesinaController::class, 'index']);
 Route::get('/clientes', [ClienteController::class, 'mostrarCliente'])->name('cliente.mostrar');
+
+Route::get('/cifras', [CifraController::class, 'cifras'])->name('cifras');
+Route::get('/admin/subir-cifras', [CifraController::class,'formularioCargaCifras'])->name('admin.subir-cifras');
+Route::post('/admin/guardar-cifras', [CifraController::class,'guardarCifras'])->name('admin.guardar-cifras');
+Route::post('/admin/guardar-cifras', [CifraController::class, 'guardarCifras'])->name('admin.guardar-cifras');
+Route::get('/admin/cifrass', [CifraController::class, 'mostrarCifras'])->name('admin.cifrass');
+Route::get('/admin/editar-cifras/{id}', [CifraController::class, 'editarCifras'])->name('admin.editar-cifras');
+Route::put('/admin/actualizar-cifras/{id}', [CifraController::class, 'actualizarCifras'])->name('admin.actualizar-cifras');
+Route::delete('/admin/eliminar-cifras/{id}', [CifraController::class, 'eliminarCifras'])->name('admin.eliminar-cifras');
+
+Route::get('/estadisticas', [EstadisticaController::class, 'estadisticas'])->name('estadisticas');
+Route::get('/admin/subir-estadisticas', [EstadisticaController::class,'formularioCargaEstadisticas'])->name('admin.subir-estadisticas');
+Route::post('/admin/guardar-estadisticas', [EstadisticaController::class,'guardarEstadisticas'])->name('admin.guardar-estadisticas');
+Route::get('/admin/estadisticass', [EstadisticaController::class, 'mostrarEstadisticas'])->name('admin.estadisticass');
+Route::get('/admin/editar-estadisticas/{id}', [EstadisticaController::class, 'editarEstadisticas'])->name('admin.editar-estadisticas');
+Route::put('/admin/actualizar-estadisticas/{id}', [EstadisticaController::class, 'actualizarEstadisticas'])->name('admin.actualizar-estadisticas');
+Route::delete('/admin/eliminar-estadisticas/{id}', [EstadisticaController::class, 'eliminarEstadisticas'])->name('admin.eliminar-estadisticas');
+
+Route::get('/riesgos', [RiesgoController::class, 'riesgos'])->name('riesgos');
+Route::get('/admin/subir-riesgos', [RiesgoController::class,'formularioCargaRiesgos'])->name('admin.subir-riesgos');
+Route::post('/admin/guardar-riesgos', [RiesgoController::class,'guardarRiesgos'])->name('admin.guardar-riesgos');
+Route::get('/admin/riesgoss', [RiesgoController::class, 'mostrarRiesgos'])->name('admin.riesgoss');
+Route::get('/admin/editar-riesgos/{id}', [RiesgoController::class, 'editarRiesgos'])->name('admin.editar-riesgos');
+Route::put('/admin/actualizar-riesgos/{id}', [RiesgoController::class, 'actualizarRiesgos'])->name('admin.actualizar-riesgos');
+Route::delete('/admin/eliminar-riesgos/{id}', [RiesgoController::class, 'eliminarRiesgos'])->name('admin.eliminar-riesgos');

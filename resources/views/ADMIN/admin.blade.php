@@ -104,6 +104,36 @@
 </div>
 <br>
 <br>
+<!-- FORMULARIO estadisticas DEL HOME -->
+<div class="fas fa" style="margin-left: 200px;">
+    <a href="{{ route('admin.subir-estadisticas') }}" class="btn btn-primary">Subir estadisticas</a>
+</div>
+<!-- ver estadisticas DEL HOME -->
+<div class="fas fa" style="margin-left: 160px;">
+    <a href="{{ route('admin.estadisticass') }}" class="btn btn-primary">Ver estadisticas</a>
+</div>
+<br>
+<br>
+<!-- FORMULARIO riesgos DEL HOME -->
+<div class="fas fa" style="margin-left: 200px;">
+    <a href="{{ route('admin.subir-riesgos') }}" class="btn btn-primary">Subir riesgos</a>
+</div>
+<!-- ver riesgos DEL HOME -->
+<div class="fas fa" style="margin-left: 160px;">
+    <a href="{{ route('admin.riesgoss') }}" class="btn btn-primary">Ver riesgos</a>
+</div>
+<br>
+<br>
+<!-- FORMULARIO cifras DEL HOME -->
+<div class="fas fa" style="margin-left: 200px;">
+    <a href="{{ route('admin.subir-cifras') }}" class="btn btn-primary">Subir cifras</a>
+</div>
+<!-- ver cifras DEL HOME -->
+<div class="fas fa" style="margin-left: 160px;">
+    <a href="{{ route('admin.cifrass') }}" class="btn btn-primary">Ver cifras</a>
+</div>
+<br>
+<br>
 <!-- FOOTER -->
 <br>
 <br>
